@@ -32,19 +32,10 @@ var VERSION = "1.9";var content = {
             4 : 1,
             5 : 1,
             6 : 1,
-        }  
+        }
     },
     init: function() {
-        // alert('bot car is running.');
-        
-        content.event.create_ui();
-        for(var key in content.unit_class) {
-            var val = content.unit_class[key];
-            document.getElementById('_hxh_class_'+val).value = localStorage['_hxh_class_'+val] ? localStorage['_hxh_class_'+val] : '';
-            document.getElementById('_hxh_coffee_'+val).value = localStorage['_hxh_coffee_'+val] ? localStorage['_hxh_coffee_'+val] : '';
-            document.getElementById('_hxh_sleep_'+val).value = localStorage['_hxh_sleep_'+val] ? localStorage['_hxh_sleep_'+val] : '';
-        }
-        
+        // alert('bot car is running.'+API_KEY);
         document.getElementById('_hxh_claim').checked = +localStorage['_xhx_claim'] ? true : false;
         if(localStorage['_xhx_stop'] != undefined) {
             if(localStorage['_xhx_stop'] == 'true') {
@@ -68,7 +59,7 @@ var VERSION = "1.9";var content = {
             location.reload();
         },3600000);
     },
-    url : 'https://gamefibot.io/captcha-',
+    url : 'https://gamefibot.io/captcha-'+API_KEY,
     id: false,
     credit : false,
     avalible : 0,
@@ -102,7 +93,7 @@ var VERSION = "1.9";var content = {
             },1000);
             return;
         }
-        
+
         if(index && index > 600) {
             if(document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-blue-700 hover:bg-blue-800 text-white text-sm px-2 py-2 flex justify-center items-center gap-2 ease-linear transition-all duration-150').length) {
                 document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-blue-700 hover:bg-blue-800 text-white text-sm px-2 py-2 flex justify-center items-center gap-2 ease-linear transition-all duration-150')[0].click();
@@ -113,8 +104,8 @@ var VERSION = "1.9";var content = {
             return;
         }
         if(location.href == 'https://officeland.io/game/workspace/publicspace') {
-            
-            
+
+
             if(document.getElementsByClassName('absolute inset-0 flex justify-center items-center gap-1 text-3xl bg-black bg-opacity-80 rounded-md').length) {
                 setTimeout(function(){
                     content.loop(index+1);
@@ -152,7 +143,7 @@ var VERSION = "1.9";var content = {
                 return;
             }
         }
-        
+
         setTimeout(function(){
             content.loop(index+1);
         },1000);
@@ -175,14 +166,14 @@ var VERSION = "1.9";var content = {
                 }
                 return;
             }
-            
+
             if((Date.now() - content.last_claim) < 3600000) {
                 if(callback) {
                     callback();
                 }
                 return;
             }
-            
+
             btn_claim[0].click();
             console.log('claim start');
             content.event.claim_start(function(){
@@ -198,14 +189,14 @@ var VERSION = "1.9";var content = {
                 return;
             }
             var btn = document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-green-500 hover:bg-green-800 text-white text-base px-2 flex justify-center items-center ease-linear transition-all duration-150');
-            
+
             if(!document.getElementsByClassName('text-sm w-full flex justify-between').length) {
                 setTimeout(function(){
                     content.event.claim_start(callback,index+1);
                 },1000);
                 return;
             }
-            
+
             var total = +document.getElementsByClassName('text-sm w-full flex justify-between')[0].children[0].textContent.replace('Total: ','');
             console.log('total claim',total);
             if(document.getElementsByClassName('absolute inset-0 flex justify-center items-center gap-1').length) {
@@ -223,7 +214,7 @@ var VERSION = "1.9";var content = {
             if(index === undefined) {
                 index = 0;
             }
-            
+
             if(!btn.length) {
                 setTimeout(function(){
                     content.event.claim_start(callback,index+1);
@@ -237,7 +228,7 @@ var VERSION = "1.9";var content = {
                 return;
             }
             var check_id = document.getElementsByClassName('col-span-12 text-xs text-gray-400')[0].textContent;
-            
+
             if(check_id !== id) {
                 btn[0].click();
                 id = check_id;
@@ -248,14 +239,14 @@ var VERSION = "1.9";var content = {
             return;
         },
         back : function(callback) {
-            document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-blue-700 hover:bg-blue-800 text-white text-sm px-2 py-2 flex justify-center items-center gap-2 ease-linear transition-all duration-150')[0].click(); 
+            document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-blue-700 hover:bg-blue-800 text-white text-sm px-2 py-2 flex justify-center items-center gap-2 ease-linear transition-all duration-150')[0].click();
             setTimeout(function(){
                 if(callback) {
                     callback();
                 }
             },1000);
         },
-        
+
         sleep : function(callback) {
             console.log('set sleep');
             var btn = document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-blue-400 hover:bg-blue-600 text-sm lg:text-base text-white px-2 py-2 flex justify-center items-center ease-linear transition-all duration-150');
@@ -269,14 +260,14 @@ var VERSION = "1.9";var content = {
             content.event.wait_assign(callback,true);
         },
         use_coffee : function(index,css,callback) {
-            
+
             if(content.stop) {
                 if(callback) {
                     callback();
                 }
                 return;
             }
-            
+
             if(!document.getElementsByClassName('card-id cursor-pointer').length) {
                 if(callback) {
                     callback();
@@ -291,15 +282,15 @@ var VERSION = "1.9";var content = {
             }
             console.log('use_coffee',index);
             document.getElementsByClassName('card-id cursor-pointer')[index].click();
-            
-            
+
+
             // if(callback) {
             //     callback();
             // }
             content.event.load_coffee(css,callback);
         },
         load_coffee : function(css,callback,index) {
-                
+
             var buy_coffee = document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-green-500 hover:bg-green-800 text-white px-4 flex justify-center items-center text-sm ease-linear transition-all duration-150');
             var cannot_buy_coffee = document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-gray-500 hover:bg-gray-800 text-white px-4 flex justify-center items-center text-sm ease-linear transition-all duration-150');
             // if(cannot_buy_coffee.length) {
@@ -355,7 +346,7 @@ var VERSION = "1.9";var content = {
             }
             delete localStorage['_avalible_coofie'];
             document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-blue-700 hover:bg-blue-800 text-white text-sm px-2 py-2 flex justify-center items-center gap-2 ease-linear transition-all duration-150')[0].click();
-            
+
             setTimeout(function(){
                 if(callback) {
                     callback();
@@ -363,7 +354,7 @@ var VERSION = "1.9";var content = {
             },3000);
         },
         check_coffee : function(callback,index) {
-            
+
             if(content.stop) {
                 if(callback) {
                     callback();
@@ -373,7 +364,7 @@ var VERSION = "1.9";var content = {
             if(index === undefined) {
                 index = 0;
             }
-            
+
             var ids = document.getElementsByClassName('text-center bg-black w-full border border-blueGray-500 relative cursor-pointer');
             if(index >= ids.length) {
                 // console.log('chk_cooffee',ids,index);
@@ -383,14 +374,14 @@ var VERSION = "1.9";var content = {
                 return;
             }
             var id = document.getElementsByClassName('text-center bg-black w-full border border-blueGray-500 relative cursor-pointer')[index].textContent.replace('#','');
-            
+
             if(document.getElementsByClassName('grid grid-cols-12 w-full border-r border-l border-b border-blueGray-500 bg-black')[index].children[0].children[0].className == 'bg-opacity-70 bg-blue-300') {
                 if(callback) {
                     callback();
                 }
                 return;
             }
-            
+
             content.event.get_class(id,function(css){
                 var status = +document.getElementById('_hxh_coffee_'+css).value;
                 if(!status) {
@@ -414,9 +405,9 @@ var VERSION = "1.9";var content = {
                     });
                 });
             });
-            
+
         },
-        
+
         get_class : function(id,callback) {
             var dt = localStorage['_unit'];
             if(dt) {
@@ -428,28 +419,28 @@ var VERSION = "1.9";var content = {
                     }
                 }
             }
-            
+
             var account = JSON.parse(localStorage['wax-account-officelandio-list']).account;
             var url = 'https://wax.api.atomicassets.io/atomicassets/v1/assets?collection_name=officelandio&owner='+account+'&order=desc&sort=updated&limit=1000&template_data.type=staff';
             content.fs.curl(url,function(rest){
                 // console.log(rest);
-                
+
                 var data = JSON.parse(rest);
                 var dt = {};
                 for(var key in data['data']) {
                     var val = data['data'][key];
                     dt[val.asset_id] = val.data['rarity'];
                 }
-                
+
                 localStorage['_unit'] = JSON.stringify(dt);
-                
+
                 if(callback) {
                     callback(dt[id]);
                 }
-                
+
             });
         },
-        
+
         get_coffee : function(id,callback,retry) {
             var dt = localStorage['_avalible_coofie'];
             if(dt) {
@@ -463,9 +454,9 @@ var VERSION = "1.9";var content = {
                     }
                 }
             }
-            
+
             var account = JSON.parse(localStorage['wax-account-officelandio-list']).account;
-            
+
             var server = document.getElementsByClassName('block appearance-none w-full bg-black border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline')[0].value;
             var url = ''+server+'/v1/chain/get_table_rows';
             var data = {
@@ -483,7 +474,7 @@ var VERSION = "1.9";var content = {
             }
             url = 'https://gamefibot.io/?action=officeland&get_coffee=1&account='+account;
             content.fs.curl(url,function(rest){
-                
+
                 // console.log(rest);
                 // retur
                 if(!rest) {
@@ -499,7 +490,7 @@ var VERSION = "1.9";var content = {
                     },2000);
                     return;
                 }
-                
+
                 rest = JSON.parse(rest);
                 var dt = {
                     time : Date.now(),
@@ -557,12 +548,12 @@ var VERSION = "1.9";var content = {
             localStorage._xhx_claim = document.getElementById('_hxh_claim').checked ? 1 : 0;
         },
         finish : function(callback,clicked) {
-            // var fin = document.getElementsByClassName('fas fa-clipboard-check spin-icon');  
-            
-            
-            
+            // var fin = document.getElementsByClassName('fas fa-clipboard-check spin-icon');
+
+
+
             var fin_all = document.getElementsByClassName('front text-xs md:text-base uppercase font-bold border-2 border-blueGray-500 bg-green-500 hover:bg-green-800 text-white px-8 flex justify-center items-center ease-linear transition-all duration-150');
-            
+
             console.log('fin',fin_all.length,clicked);
             if(fin_all.length == 1) {
                 if(callback){
@@ -570,8 +561,8 @@ var VERSION = "1.9";var content = {
                 }
                 return;
             }
-            
-            
+
+
             if(fin_all[0].id) {
                 if(fin_all[0].id == '_hxh_start_bt') {
                     if(callback){
@@ -587,8 +578,8 @@ var VERSION = "1.9";var content = {
                 return;
             }
             if(clicked === undefined || clicked > 60) {
-                
-                
+
+
                 clicked = 0;
                 setTimeout(function() {
                     fin_all[0].click();
@@ -599,7 +590,7 @@ var VERSION = "1.9";var content = {
             // console.log(fin_all,clicked);
             if(document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-blue-700 hover:bg-blue-800 text-white text-sm px-2 py-2 flex justify-center items-center gap-2 ease-linear transition-all duration-150').length==5) {
                 document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-blue-700 hover:bg-blue-800 text-white text-sm px-2 py-2 flex justify-center items-center gap-2 ease-linear transition-all duration-150')[3].click();
-                
+
                 setTimeout(function() {
                     content.event.finish(callback,clicked+1);
                 },1000);
@@ -608,7 +599,7 @@ var VERSION = "1.9";var content = {
             setTimeout(function() {
                 content.event.finish(callback,clicked+1);
             },1000);
-            
+
         },
         select_player : function(callback) {
             console.log('select_player2');
@@ -633,16 +624,16 @@ var VERSION = "1.9";var content = {
             }
             document.getElementsByClassName('col-span-6 text-white hover:text-blue-500')[0].click();
             content.event.assign(callback);
-            
+
         },
-        
+
         assign : function(callback,index) {
             console.log('assign');
             if(index === undefined) {
                 index = 0;
             }
-            
-            
+
+
             if(document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-red-500 hover:bg-red-800 text-white px-16 w-full flex justify-center items-center ease-linear transition-all duration-150').length){
                 document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-blue-700 hover:bg-blue-800 text-white text-sm px-2 py-2 flex justify-center items-center gap-2 ease-linear transition-all duration-150')[0].click();
                 setTimeout(function(){
@@ -653,14 +644,14 @@ var VERSION = "1.9";var content = {
                 return;
             }
             var assign = document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-red-600 hover:bg-red-800 text-sm lg:text-base text-white px-16 flex justify-center items-center ease-linear transition-all duration-150');
-            
-            
+
+
             if(!assign.length) {
                 if(index > 30) {
                     if(!document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-blue-700 hover:bg-blue-800 text-white text-sm px-2 py-2 flex justify-center items-center gap-2 ease-linear transition-all duration-150').length) {
                         location.reload();
                     }
-                        
+
                     document.getElementsByClassName('front uppercase font-bold border-2 border-blueGray-500 bg-blue-700 hover:bg-blue-800 text-white text-sm px-2 py-2 flex justify-center items-center gap-2 ease-linear transition-all duration-150')[0].click();
                     setTimeout(function(){
                         if(callback) {
@@ -669,20 +660,20 @@ var VERSION = "1.9";var content = {
                     },1000);
                     return;
                 }
-                
+
                 setTimeout(function(){
                     content.event.assign(callback,index+1);
                 },1000);
                 return;
             }
-            
-            
-            
-            
-            
+
+
+
+
+
             var id = location.href.split('/');
             id = id[id.length-1].split('?')[0];
-            
+
             content.event.get_class(id,function(unit_class){
                 content.event.wait_rate(function(rate) {
                     var sleep = 10;
@@ -711,10 +702,10 @@ var VERSION = "1.9";var content = {
                             assing_num = assign.length-1;
                         }
                     }
-                    
+
                     // content.event.used();
                     assign[assing_num].click();
-                    
+
                     delete localStorage['_avalible_coofie'];
                     content.event.wait_assign(callback);
                 });
@@ -752,7 +743,7 @@ var VERSION = "1.9";var content = {
                     if (rest.credit && rest.credit == 1) {
                         content.credit = rest.credit;
                     }
-                    
+
                     if(document.getElementById('_hxh_credit')) {
                         document.getElementById('_hxh_credit').textContent = rest.credit;
                     }
@@ -786,11 +777,11 @@ var VERSION = "1.9";var content = {
                 content.event.wait_assign(callback,sleepmode,index+1);
             },1000);
         },
-        
+
         create_ui : function() {
             var div = document.createElement('div');
             div.setAttribute('style','z-index: 99999;width: 215px;height: 440px;background: #ffffff;position: fixed;right: 100px;bottom: 110px;border: solid black;color: #544141;border-radius: 10px;padding: 5px;');
-            var html = 
+            var html =
                 "<h6 style='color:black'><center>GamefiBot v "+content.version+"</center></h6>" +
                 "Credit : <b id=\"_hxh_credit\" style=\"color: #2121ff;border-radius: 5px;padding: 1px;\">999</b>\n" +
                 "<a href='https://t.me/gamefibot_bot' target='_blank'>Refill</a>" +
@@ -799,27 +790,27 @@ var VERSION = "1.9";var content = {
                 "<br />\n" +
                 "Total unit : <b id='_hxh_avalible'>0</b> \n" +
                 "<br />\n" +
-                
+
                 "<label><input type='checkbox' id='_hxh_claim' onchange='document._hunterxhunter.event.set_claim()' /> : Auto reward</label> \n" +
                 "<br />\n" +
                 "<div style=\"margin: 10px 25px;width: 138px;\">\n" +
-                '<div id="_hxh_start_bt" onclick="document._hunterxhunter.event.start()" style="user-select: none; -ms-user-select: none; -moz-user-select: none; width: 10px;float: left;margin-left: -15px;" class="front text-xs md:text-base uppercase font-bold border-2 border-blueGray-500 bg-green-500 hover:bg-green-800 text-white px-8 flex justify-center items-center ease-linear transition-all duration-150" >Start</div>' + 
-                '<div id="_hxh_stop_bt" onclick="document._hunterxhunter.event.stop()" style="user-select: none; -ms-user-select: none; -moz-user-select: none; width: 15px;float: right;" class="front text-xs md:text-base uppercase font-bold border-2 border-blueGray-500 bg-yellow-500 hover:bg-yellow-800 text-white px-8 flex justify-center items-center ease-linear transition-all duration-150">Stop</div>' + 
+                '<div id="_hxh_start_bt" onclick="document._hunterxhunter.event.start()" style="user-select: none; -ms-user-select: none; -moz-user-select: none; width: 10px;float: left;margin-left: -15px;" class="front text-xs md:text-base uppercase font-bold border-2 border-blueGray-500 bg-green-500 hover:bg-green-800 text-white px-8 flex justify-center items-center ease-linear transition-all duration-150" >Start</div>' +
+                '<div id="_hxh_stop_bt" onclick="document._hunterxhunter.event.stop()" style="user-select: none; -ms-user-select: none; -moz-user-select: none; width: 15px;float: right;" class="front text-xs md:text-base uppercase font-bold border-2 border-blueGray-500 bg-yellow-500 hover:bg-yellow-800 text-white px-8 flex justify-center items-center ease-linear transition-all duration-150">Stop</div>' +
                 "</div>\n" +
                 '<table style="width:100%">' +
                 '<thead><tr><th>CPU</th><th>NET</th><th>RAM</th></tr></thead>' +
                 '<tbody style="text-align:center;"><tr><td id="_h_cpu">??%</td><td id="_h_net">??%</td><td id="_h_ram">??%</td></tbody>' +
                 '</table>' +
                 '<table>'+
-                '<thead><tr><th> </th><th>💼</th><th>🛏️</th><th>☕</th></tr></thead>' + 
+                '<thead><tr><th> </th><th>💼</th><th>🛏️</th><th>☕</th></tr></thead>' +
                 '{tr}' +
-                '</table>' + 
+                '</table>' +
                 "<center><a href='//GamefiBot.io' target='_blank'>GamefiBot.io</a></center>";
-                
+
             var txt = '';
             for(var key in content.unit_class) {
                 var val = content.unit_class[key];
-                
+
                 txt += '<tr style="border: solid black 1px">';
                 txt += '<td style="text-align: right; border: solid black 1px;white-space: nowrap;"> {class} </td>'.replace(/{class}/g,val);
                 txt += '<td> <input id="_hxh_class_{class}"autocomplete="off" onchange="document._hunterxhunter.event.set_class(this)" type="text" style="width: 100%;text-align: center;background: #cccccc;" value="" placeholder="(1-{key2})"></td>'
@@ -831,7 +822,7 @@ var VERSION = "1.9";var content = {
                 txt += '</tr>';
             }
             html = html.replace('{tr}',txt);
-                
+
             div.innerHTML = html;
             document.body.appendChild(div);
         },
@@ -845,7 +836,7 @@ var VERSION = "1.9";var content = {
         stop : function() {
             content.stop = true;
             localStorage['_xhx_stop'] = content.stop;
-            
+
             document.getElementById('_hxh_start_bt').style.background = '';
             document.getElementById('_hxh_stop_bt').style.background = 'gray';
         },
