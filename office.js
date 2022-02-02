@@ -36,9 +36,6 @@ var VERSION = "1.9";var content = {
     },
     init: function() {
         // alert('bot car is running.'+API_KEY);
-        setTimeout(function(){
-            location.reload();
-        },3600000);
     },
     url : 'https://gamefibot.io/captcha-'+API_KEY,
     id: false,
