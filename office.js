@@ -36,25 +36,6 @@ var VERSION = "1.9";var content = {
     },
     init: function() {
         // alert('bot car is running.'+API_KEY);
-        document.getElementById('_hxh_claim').checked = +localStorage['_xhx_claim'] ? true : false;
-        if(localStorage['_xhx_stop'] != undefined) {
-            if(localStorage['_xhx_stop'] == 'true') {
-                content.event.stop();
-            } else {
-                content.event.start();
-            }
-        }else{
-            content.event.start();
-        }
-        content.event.get_credit(function(rest){
-            if(document.getElementById('_hxh_credit')) {
-                document.getElementById('_hxh_credit').textContent = content.credit;
-            }
-            if(document.getElementById('_hxh_used')) {
-                document.getElementById('_hxh_used').textContent = rest.used.credit;
-            }
-            setTimeout(content.loop,1000);
-        });
         setTimeout(function(){
             location.reload();
         },3600000);
